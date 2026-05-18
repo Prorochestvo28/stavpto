@@ -69,11 +69,21 @@ class Document extends Model
     public function statusLabel(): string
     {
         return match ($this->status) {
-            'draft' => 'Черновик',
+            'draft' => 'Архивный',
             'review' => 'На согласовании',
             'approved' => 'Согласован',
             'rejected' => 'Отклонён',
             default => $this->status,
+        };
+    }
+
+    public function statusBadgeClass(): string
+    {
+        return match ($this->status) {
+            'review' => 'sed-badge sed-badge--warn',
+            'approved' => 'sed-badge sed-badge--ok',
+            'rejected' => 'sed-badge sed-badge--danger',
+            default => 'sed-badge',
         };
     }
 }

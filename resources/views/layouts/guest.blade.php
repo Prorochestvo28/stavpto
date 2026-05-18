@@ -8,5 +8,6 @@
 </head>
 <body>
     @yield('content')
+    @include('partials.toasts')
 </body>
 </html>

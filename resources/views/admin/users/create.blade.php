@@ -8,16 +8,6 @@
     <p><a href="{{ route('admin.users.index') }}">← К списку пользователей</a></p>
 </div>
 
-@if ($errors->any())
-    <div class="sed-card" style="margin-bottom:1rem;border-color:#e0b4b4;">
-        <ul class="sed-muted" style="margin:0;padding-left:1.25rem;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 <div class="sed-card" style="max-width:36rem;">
     <form method="post" action="{{ route('admin.users.store') }}">
         @csrf

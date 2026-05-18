@@ -17,7 +17,12 @@ return new class extends Migration
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->timestamp('deadline')->nullable();
+            $table->text('initiator_comment')->nullable();
             $table->timestamps();
+
+            $table->index('status', 'approval_processes_status_idx');
+            $table->index('initiator_id', 'approval_processes_initiator_id_idx');
+            $table->index('deadline', 'approval_processes_deadline_idx');
         });
     }
 

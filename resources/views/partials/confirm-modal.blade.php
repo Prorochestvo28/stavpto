@@ -6,7 +6,7 @@
             <button type="button" class="sed-modal-close" data-sed-confirm-cancel title="Закрыть" aria-label="Закрыть">&times;</button>
         </div>
         <div class="sed-modal-panel__body">
-            <p id="sed-confirm-modal-text" class="sed-muted" style="margin:0;line-height:1.45;"></p>
+            <p id="sed-confirm-modal-text" style="margin:0;line-height:1.45;"></p>
         </div>
         <div class="sed-modal-panel__foot sed-modal-panel__foot--form">
             <button type="button" class="sed-btn sed-btn--ghost sed-btn--sm" data-sed-confirm-cancel>Отмена</button>

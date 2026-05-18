@@ -13,7 +13,8 @@ return new class extends Migration
             $table->string('position')->nullable()->after('full_name');
             $table->foreignId('department_id')->nullable()->after('position')->constrained('departments')->nullOnDelete();
             $table->string('phone')->nullable()->after('email');
-            $table->string('role')->default('user')->after('password'); // admin, editor, user
+            $table->string('signature_pin')->nullable()->after('password');
+            $table->string('role')->default('user')->after('signature_pin'); // admin, department_head, user
             $table->boolean('is_active')->default(true)->after('role');
         });
     }
@@ -22,7 +23,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['department_id']);
-            $table->dropColumn(['full_name', 'position', 'department_id', 'phone', 'role', 'is_active']);
+            $table->dropColumn(['full_name', 'position', 'department_id', 'phone', 'signature_pin', 'role', 'is_active']);
         });
     }
 };

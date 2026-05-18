@@ -17,8 +17,6 @@ class TestUsersSeeder extends Seeder
         $accounting = Department::query()->where('name', 'Бухгалтерия')->first();
 
         if (! $it || ! $legal || ! $hr || ! $accounting) {
-            $this->command?->warn('TestUsersSeeder: не найдены отделы из DepartmentSeeder, пропуск.');
-
             return;
         }
 

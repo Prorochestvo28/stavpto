@@ -15,16 +15,12 @@
         <h2 id="sed-approval-doc-heading" class="sed-approval-doc__title">Согласование</h2>
         <p class="sed-approval-doc__status">Статус документа: <strong>{{ $document->statusLabel() }}</strong></p>
 
-        @if($document->status === 'approved')
-            <p class="sed-approval-doc__text">Маршрут завершён, документ согласован.</p>
-        @elseif($document->status === 'rejected')
-            <p class="sed-approval-doc__text">Маршрут завершён с отклонением.</p>
+        @if($document->status === 'rejected')
             <form method="post" action="{{ route('documents.reopen-draft', $document) }}" class="sed-approval-doc__form">
                 @csrf
                 <button type="submit" class="sed-btn sed-btn--ghost sed-btn--sm">Вернуть в черновик</button>
             </form>
         @elseif($proc)
-            <p class="sed-approval-doc__text">Текущий маршрут согласования.</p>
             <p class="sed-approval-doc__meta">
                 Срок: <strong>@if($proc->deadline){{ $proc->deadline->timezone(config('app.timezone'))->format('d.m.Y') }}@else не задан@endif</strong>
                 · Инициатор: <strong>{{ $proc->initiator?->displayName() ?? $proc->initiator?->email ?? '—' }}</strong>
@@ -32,14 +28,6 @@
             <div class="sed-approval-doc__route">
                 @include('documents.partials.approval-route-readonly', ['process' => $proc])
             </div>
-        @elseif($canStart)
-            <p class="sed-approval-doc__text">Черновик. Запуск — кнопка «Отправить на согласование» выше.</p>
-        @else
-            <p class="sed-approval-doc__text">Запуск согласования недоступен.</p>
-        @endif
-
-        @if($document->status === 'approved' && $pastApprovalProcesses->isNotEmpty())
-            <p class="sed-approval-doc__hint">Прошлые маршруты — в колонке справа (на узком экране — ниже).</p>
         @endif
 
         @if($proc && $approvalActionStep && auth()->user()->hasSignaturePin())
@@ -129,7 +117,7 @@
             </div>
             <div class="sed-field" style="margin-bottom:0;">
                 <label for="sed-initiator-comment">Комментарий</label>
-                <textarea class="sed-input" id="sed-initiator-comment" name="initiator_comment" rows="3" maxlength="2000">{{ old('initiator_comment') }}</textarea>
+                <textarea class="sed-textarea" id="sed-initiator-comment" name="initiator_comment" rows="3" maxlength="2000">{{ old('initiator_comment') }}</textarea>
             </div>
             <div class="sed-modal-panel__foot sed-modal-panel__foot--form" style="margin-top:0.75rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
                 <a href="{{ $docBaseUrl }}" class="sed-btn sed-btn--ghost sed-btn--sm">Отмена</a>

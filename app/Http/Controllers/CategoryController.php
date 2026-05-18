@@ -17,7 +17,6 @@ class CategoryController extends Controller
         Category::query()->create([
             'name' => $data['name'],
             'parent_id' => $data['parent_id'] ?? null,
-            'path' => null,
         ]);
 
         return back()->with('status', 'Папка создана');

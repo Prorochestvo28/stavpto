@@ -2,7 +2,7 @@
     $listBaseUrl = \Illuminate\Support\Str::before(request()->fullUrl(), '#');
 @endphp
 @if(!empty($breadcrumbs) && count($breadcrumbs) > 0)
-    <p class="sed-muted" style="margin:0 0 0.75rem;">
+    <p class="sed-flash" style="margin:0 0 0.75rem;">
         <a href="{{ route('documents.index') }}">Корень</a>
         @foreach($breadcrumbs as $bc)
             / <a href="{{ route('categories.show', $bc) }}">{{ $bc->name }}</a>
@@ -16,6 +16,7 @@
             <tr>
                 <th class="sed-table__icon-col" scope="col"><span class="visually-hidden">Тип</span></th>
                 <th>Название</th>
+                <th>Статус</th>
                 <th>Изменён</th>
                 <th>Последний изменивший</th>
                 <th style="text-align:right;">Действия</th>
@@ -28,6 +29,7 @@
                         <img class="sed-file-icon" src="{{ \App\Support\FileIcon::urlForFolder() }}" width="24" height="24" alt="" role="presentation">
                     </td>
                     <td><a href="{{ route('categories.show', $c) }}">{{ $c->name }}</a></td>
+                    <td>—</td>
                     <td>{{ $c->updated_at?->format('d.m.Y') }}</td>
                     <td>—</td>
                     <td style="text-align:right;">
@@ -51,6 +53,7 @@
                         <img class="sed-file-icon" src="{{ \App\Support\FileIcon::urlForDocument($doc->latestVersion?->file_name) }}" width="24" height="24" alt="" role="presentation">
                     </td>
                     <td><a href="{{ route('documents.show', $doc) }}">{{ $doc->name }}</a></td>
+                    <td><span class="{{ $doc->statusBadgeClass() }}">{{ $doc->statusLabel() }}</span></td>
                     <td>{{ $doc->updated_at?->format('d.m.Y') }}</td>
                     <td>{{ $doc->lastEditor?->displayName() ?? '—' }}</td>
                     <td style="text-align:right;">
@@ -66,7 +69,7 @@
             @empty
                 @if($categories->isEmpty())
                     <tr>
-                        <td colspan="5">Пока пусто. Создайте папку или загрузите документ.</td>
+                        <td colspan="6">Пока пусто. Создайте папку или загрузите документ.</td>
                     </tr>
                 @endif
             @endforelse

@@ -8,10 +8,6 @@
     <p><a href="{{ route('documents.index') }}">← Документы</a> · <a href="{{ route('admin.users.index') }}">Пользователи</a></p>
 </div>
 
-@if (session('status'))
-    <p class="sed-muted" style="margin:0 0 0.75rem;">{{ session('status') }}</p>
-@endif
-
 <div class="sed-card">
     <div class="sed-table-wrap">
         <table class="sed-table">

@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text('change_comment')->nullable();
             $table->foreignId('author_id')->constrained('users')->cascadeOnDelete();
             $table->timestamp('created_at')->useCurrent();
+
+            $table->index(['document_id', 'version_number'], 'document_versions_doc_ver_idx');
+            $table->index('author_id', 'document_versions_author_id_idx');
         });
     }
 

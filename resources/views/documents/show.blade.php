@@ -10,7 +10,7 @@
     $catEditOld = old('category_id', $document->category_id);
 @endphp
 <div class="sed-page-header">
-    <p class="sed-muted" style="margin:0 0 0.35rem;">
+    <p style="margin:0 0 0.35rem;">
         @if($document->category)
             <a href="{{ route('categories.show', $document->category) }}">← {{ $document->category->name }}</a>
             <span> · </span>
@@ -20,20 +20,6 @@
     <h1>{{ $document->name }}</h1>
     <p>Статус: <strong>{{ $document->statusLabel() }}</strong></p>
 </div>
-
-@if (session('status'))
-    <p class="sed-muted" style="margin:0 0 0.75rem;">{{ session('status') }}</p>
-@endif
-
-@if ($errors->any())
-    <div class="sed-card" style="margin-bottom:1rem;border-color:#e0b4b4;">
-        <ul class="sed-muted" style="margin:0;padding-left:1.25rem;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 
 <div class="sed-doc-layout">
     <div class="sed-card" style="margin-bottom:0;">
@@ -91,9 +77,6 @@
     <div class="sed-split">
         <div class="sed-card sed-comments">
             <h2>Комментарии</h2>
-            @if (session('comment_status'))
-                <p class="sed-muted" style="margin:0 0 0.75rem;">{{ session('comment_status') }}</p>
-            @endif
             <form method="post" action="{{ route('documents.comments.store', $document) }}" style="margin-bottom:1rem;">
                 @csrf
                 <div class="sed-field" style="margin-bottom:0.5rem;">
@@ -101,7 +84,7 @@
                     <textarea class="sed-textarea" id="sed-doc-comment-body" name="body" rows="3" required maxlength="10000" placeholder="Текст комментария">{{ old('body') }}</textarea>
                 </div>
                 @error('body')
-                    <p class="sed-muted" style="margin:0 0 0.5rem;color:#a33;">{{ $message }}</p>
+                    <p class="sed-field-error">{{ $message }}</p>
                 @enderror
                 <button type="submit" class="sed-btn sed-btn--primary sed-btn--sm">Отправить</button>
             </form>
@@ -110,12 +93,12 @@
                     <li style="padding:0.65rem 0;@if(!$loop->last) border-bottom:1px solid var(--border-color);@endif">
                         <div style="display:flex;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.35rem;font-size:0.85rem;">
                             <strong>{{ $comment->user?->displayName() ?? '—' }}</strong>
-                            <span class="sed-muted">{{ $comment->created_at?->format('d.m.Y H:i') }}</span>
+                            <span>{{ $comment->created_at?->format('d.m.Y H:i') }}</span>
                         </div>
                         <div style="white-space:pre-wrap;word-break:break-word;font-size:0.92rem;line-height:1.45;">{{ $comment->body }}</div>
                     </li>
                 @empty
-                    <li class="sed-muted" style="padding:0.25rem 0;border:0;">Комментариев пока нет.</li>
+                    <li style="padding:0.25rem 0;border:0;">Комментариев пока нет.</li>
                 @endforelse
             </ul>
         </div>
@@ -131,6 +114,9 @@
                                     <span> · {{ $v->file_name }}</span>
                                 @endif
                             </div>
+                            <div style="margin-top:0.2rem;font-size:0.85rem;">
+                                Изменил: {{ $v->author?->displayName() ?? '—' }}
+                            </div>
                             @if($v->change_comment)
                                 <div style="margin-top:0.25rem;font-size:0.85rem;line-height:1.35;">{{ \Illuminate\Support\Str::limit($v->change_comment, 200) }}</div>
                             @endif
@@ -143,7 +129,7 @@
                                 <a class="sed-btn sed-btn--ghost sed-btn--sm" href="{{ route('documents.versions.download', [$document, $v]) }}">Скачать</a>
                             </div>
                         @else
-                            <span class="sed-muted">—</span>
+                            <span>—</span>
                         @endif
                     </li>
                 @empty

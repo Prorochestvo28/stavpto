@@ -10,16 +10,6 @@
         </div>
         <h1>Вход в систему</h1>
 
-        @if ($errors->any())
-            <div class="sed-field" style="margin-bottom:1rem;">
-                <ul class="sed-muted" style="margin:0;padding-left:1.25rem;color:#a33;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form method="post" action="{{ route('login.store') }}">
             @csrf
             <div class="sed-field">

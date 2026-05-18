@@ -12,8 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
-            $table->string('path')->nullable();
             $table->timestamps();
+
+            $table->index('parent_id', 'categories_parent_id_idx');
         });
     }
 

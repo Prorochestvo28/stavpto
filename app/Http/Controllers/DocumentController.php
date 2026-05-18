@@ -35,8 +35,12 @@ class DocumentController extends Controller
             })
             ->when($request->filled('date_from'), fn ($q) => $q->whereDate('updated_at', '>=', $request->input('date_from')))
             ->when($request->filled('date_to'), fn ($q) => $q->whereDate('updated_at', '<=', $request->input('date_to')))
-            ->when($request->input('filter') === 'active', fn ($q) => $q->whereIn('status', ['draft', 'review']))
-            ->when($request->input('filter') === 'archive', fn ($q) => $q->whereIn('status', ['approved', 'rejected']))
+            ->when($request->input('filter') === 'review', fn ($q) => $q->where('status', 'review'))
+            ->when($request->input('filter') === 'approved', fn ($q) => $q->where('status', 'approved'))
+            ->when($request->input('filter') === 'rejected', fn ($q) => $q->where('status', 'rejected'))
+            ->when($request->input('filter') === 'archive', function ($q) {
+                $q->where('status', 'draft')->whereDoesntHave('approvalProcesses');
+            })
             ->orderByDesc('updated_at')
             ->paginate(10)
             ->withQueryString();
@@ -195,6 +199,7 @@ class DocumentController extends Controller
             'author:id,name,email,full_name',
             'lastEditor:id,name,email,full_name',
             'departments:id,name',
+            'versions.author:id,name,email,full_name',
             'versions' => fn ($q) => $q->orderByDesc('version_number'),
             'activeApprovalProcess.steps.assignee.department:id,name',
             'activeApprovalProcess.initiator',

@@ -49,6 +49,7 @@
     </div>
     @include('partials.modals')
     @include('partials.confirm-modal')
+    @include('partials.toasts')
     @yield('scripts')
     <script>
     (function () {

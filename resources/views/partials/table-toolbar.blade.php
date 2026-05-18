@@ -18,12 +18,14 @@
             <input class="sed-input sed-input--date" type="date" id="date-to-{{ $tid }}" name="date_to" value="{{ request('date_to') }}">
         </div>
     </div>
-    <div class="sed-field" style="margin:0;min-width:150px;">
-        <label for="filter-{{ $tid }}">Фильтр</label>
+    <div class="sed-field" style="margin:0;min-width:11rem;">
+        <label for="filter-{{ $tid }}">Статус</label>
         <select class="sed-select" id="filter-{{ $tid }}" name="filter">
             <option value="" @selected(request('filter') === null || request('filter') === '')>Все</option>
-            <option value="active" @selected(request('filter') === 'active')>Активные</option>
-            <option value="archive" @selected(request('filter') === 'archive')>Архив</option>
+            <option value="review" @selected(request('filter') === 'review')>На согласовании</option>
+            <option value="approved" @selected(request('filter') === 'approved')>Согласованные</option>
+            <option value="archive" @selected(request('filter') === 'archive')>Архивные</option>
+            <option value="rejected" @selected(request('filter') === 'rejected')>Отклонённые</option>
         </select>
     </div>
     @isset($toolbarActions)

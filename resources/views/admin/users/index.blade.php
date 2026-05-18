@@ -12,20 +12,6 @@
     </p>
 </div>
 
-@if (session('status'))
-    <p class="sed-muted" style="margin:0 0 0.75rem;">{{ session('status') }}</p>
-@endif
-
-@if ($errors->any())
-    <div class="sed-card" style="margin-bottom:1rem;border-color:#e0b4b4;">
-        <ul class="sed-muted" style="margin:0;padding-left:1.25rem;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 <div class="sed-card">
     <p style="margin:0 0 1rem;">
         <a class="sed-btn sed-btn--primary sed-btn--sm" href="{{ route('admin.users.create') }}">Новый пользователь</a>

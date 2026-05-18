@@ -325,7 +325,6 @@ img {
 
 .sed-user-row__hint {
   font-size: 0.75rem;
-  color: var(--light-text);
 }
 
 .sed-page-header {
@@ -340,7 +339,6 @@ img {
 
 .sed-page-header p {
   margin: 0;
-  color: var(--light-text);
   font-size: 0.9rem;
 }
 
@@ -605,9 +603,109 @@ img {
   color: #2e7d32;
 }
 
-.sed-muted {
-  color: var(--light-text);
+.sed-badge--danger {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.sed-toast-stack {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 0.5rem;
+  max-width: min(22rem, calc(100vw - 2.5rem));
+  pointer-events: none;
+}
+
+.sed-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   font-size: 0.9rem;
+  line-height: 1.4;
+  pointer-events: auto;
+  animation: sed-toast-in 0.35s ease-out both;
+}
+
+.sed-toast--success {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+.sed-toast--error {
+  background: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+.sed-toast--hide {
+  animation: sed-toast-out 0.28s ease-in forwards;
+}
+
+.sed-toast__message {
+  flex: 1;
+}
+
+.sed-toast__close {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0 0.15rem;
+  border: none;
+  background: transparent;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.65;
+}
+
+.sed-toast__close:hover {
+  opacity: 1;
+}
+
+@keyframes sed-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(1.25rem) translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes sed-toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(1.25rem);
+  }
+}
+
+.sed-flash {
+  color: var(--primary-dark);
+  font-size: 0.9rem;
+}
+
+.sed-field-error {
+  margin: 0.35rem 0 0;
+  color: #a33;
+  font-size: 0.88rem;
+}
+
+.sed-field-error-list {
+  color: #a33;
 }
 
 .sed-hint {
@@ -621,19 +719,26 @@ img {
   font-weight: 600;
 }
 
-.sed-textarea {
+.sed-textarea,
+textarea.sed-input {
+  display: block;
   width: 100%;
-  min-height: 5rem;
+  min-height: 2.75rem;
+  max-height: 14rem;
   padding: 0.55rem 0.65rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   font: inherit;
+  line-height: 1.45;
   color: var(--text-color);
   background: var(--white);
   resize: vertical;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
-.sed-textarea:focus {
+.sed-textarea:focus,
+textarea.sed-input:focus {
   outline: 2px solid var(--primary-light);
   outline-offset: 0;
   border-color: var(--primary-color);
@@ -815,7 +920,6 @@ button.sed-target-modal__scrim {
 .sed-approval-doc__status {
   margin: 0 0 0.75rem;
   font-size: 0.9rem;
-  color: var(--light-text);
 }
 
 .sed-approval-doc__text {
@@ -831,7 +935,6 @@ button.sed-target-modal__scrim {
 .sed-approval-doc__hint {
   margin: 0.5rem 0 0;
   font-size: 0.85rem;
-  color: var(--light-text);
 }
 
 .sed-approval-doc__form {

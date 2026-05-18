@@ -10,7 +10,7 @@
     <div class="sed-pdf-canvas-wrap">
         <canvas class="sed-pdf-canvas" data-pdf-canvas></canvas>
     </div>
-    <p class="sed-muted sed-pdf-error" style="margin:0;padding:0.75rem 1rem;display:none;" data-pdf-error></p>
+    <p class="sed-pdf-error" style="margin:0;padding:0.75rem 1rem;display:none;color:#a33;" data-pdf-error></p>
 </div>
 <script type="module">
 (async () => {

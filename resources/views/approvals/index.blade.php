@@ -5,22 +5,7 @@
 @section('content')
 <div class="sed-page-header">
     <h1>Согласования документов</h1>
-    <p>Задачи на вашем этапе и история по маршрутам.</p>
 </div>
-
-@if (session('status'))
-    <p class="sed-muted" style="margin:0 0 0.75rem;">{{ session('status') }}</p>
-@endif
-
-@if ($errors->any())
-    <div class="sed-card" style="margin-bottom:1rem;border-color:#e0b4b4;">
-        <ul class="sed-muted" style="margin:0;padding-left:1.25rem;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 
 <div class="sed-card" style="margin-bottom:1rem;">
     <h2 style="margin-top:0;">На вашем этапе</h2>

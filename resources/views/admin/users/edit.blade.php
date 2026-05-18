@@ -30,9 +30,9 @@
         </div>
         @if($editUser->id === auth()->id())
             <div class="sed-field">
-                <span class="sed-muted" style="font-size:0.9rem;">Должность</span>
+                <span class="" style="font-size:0.9rem;">Должность</span>
                 <div style="margin-top:0.35rem;padding:0.5rem 0.65rem;background:var(--surface-muted,#f5f5f5);border-radius:4px;">{{ $editUser->position ?: '—' }}</div>
-                <p class="sed-muted" style="margin:0.35rem 0 0;font-size:0.85rem;">Свою должность можно менять только через администратора.</p>
+                <p class="" style="margin:0.35rem 0 0;font-size:0.85rem;">Свою должность можно менять только через администратора.</p>
             </div>
         @else
             <div class="sed-field">
